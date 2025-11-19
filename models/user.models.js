@@ -5,15 +5,15 @@ import dotenv from "dotenv"
 dotenv.config()
 
 
-const userSchema= new mongoose.Schema({
-    fullname:{
-        firstname:{
+const userSchema = new mongoose.Schema({
+    fullname: {
+        firstname: {
             type: String,
             required: [true, "First name is required"],
             minlegth: [3, "First name must be at least 3 characters"],
             trim: true
         },
-        lastname:{
+        lastname: {
             type: String,
             minlegth: [3, "Last name must be at least 3 characters"],
             trim: true
@@ -27,27 +27,29 @@ const userSchema= new mongoose.Schema({
         minlegth: [5, "Email must be at least 5 characters"],
         lowercase: true
     },
-    password:{
+    password: {
         type: String,
         required: [true, "Password is required"],
-        select : false
+        select: false
     },
-    socketId:{
+    socketId: {
         type: String,
     }
 })
 
-userSchema.methods.generateAuthToken = async function() {
-    const token = await jwt.sign({_id: this._id}, process.env.JWT_SECRET, {expiresIn: '7d'})
+//method to generate auth token which runs on document level
+userSchema.methods.generateAuthToken = async function () {
+    const token = await jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '24h' })
     return token;
 }
-
-userSchema.methods.comparePassword =async function(password){
+//compare password using methods which runs on document level
+userSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
-userSchema.statics.hashPassword= async function(password) {
- return await bcrypt.hash(password, 10)
+//hashing password using statics method which runs on model level
+userSchema.statics.hashPassword = async function (password) {
+    return await bcrypt.hash(password, 10)
 }
 // userSchema.pre('save', async function(next) {
 //     if (!this.isModified("password")) return next();
