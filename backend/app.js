@@ -18,5 +18,5 @@ app.use(cookieParser())
 
 
 app.use("/users", userRoutes)
-app.use('/captians', captainRoutes)
+app.use('/captains', captainRoutes)
 export default app

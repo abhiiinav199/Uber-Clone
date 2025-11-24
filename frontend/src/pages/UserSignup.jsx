@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { UserDataContext } from '../context/UserContext';
 
 const UserSignup = () => {
   const [data, setdata] = useState({
     firstname: "",
     lastname:"",
     email: "",
-    password: ""
+    password: "",
   })
+  const {user, setUser} = useContext(UserDataContext)
 
-  const [userSignupData, setuserSignupData] = useState({})
+
+  const navigate=useNavigate()
   
    const handleChange = (e) => {
     const {name, value} = e.target;
@@ -18,18 +22,29 @@ const UserSignup = () => {
     ))
   }
 
-   const SubmitHandler = (e) => {
+   const SubmitHandler = async (e) => {
     e.preventDefault();
-    setuserSignupData({
-      fullname:{
-        first: data.firstname,
-        last: data.lastname
+    const newUser= {
+       fullname:{
+        firstname: data.firstname,
+        lastname: data.lastname
       },
       email: data.email,
       password: data.password
-    })
-    console.log(userSignupData)
+    }
+    
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser)
 
+    if(res.status === 201){
+      
+      const data = res.data
+
+      setUser(data.user)
+      localStorage.setItem('token', data.token)
+      navigate("/home")
+
+
+    }
     setdata({
       firstname: "",
       lastname:"",
@@ -92,7 +107,7 @@ const UserSignup = () => {
               onChange={handleChange}
             />
 
-            <button className='cursor-pointer bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-lg placeholder:text-base ' type='submit'>Login</button>
+            <button className='cursor-pointer bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-lg placeholder:text-base ' type='submit'>Create Account</button>
 
           </form>
           <p className='text-center'>Already Have a Account <Link to="/login" className='text-blue-600'>Login Here</Link></p>
