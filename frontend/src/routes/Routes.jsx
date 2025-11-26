@@ -22,9 +22,10 @@ const Routing = () => {
                 <Route path="/captain-signup" element={<CaptainSignUp />} />
                 <Route path="/captain-login" element={<CaptainLogin />} />
                 <Route path="/home" element={
-                    <UserProtectedWrapper>
+                    // <UserProtectedWrapper>
                         <Home />
-                    </UserProtectedWrapper>} />
+                        }/>
+                    {/* </UserProtectedWrapper>} /> */}
                 <Route path="/user/logout" element={
                     <UserProtectedWrapper>  
                         <UserLogout />
