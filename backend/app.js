@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser"
 import { connectDB } from "./config/db.js"
 import userRoutes from "./routes/user.routes.js"
 import captainRoutes from "./routes/captain.routes.js"
+import mapsRoutes from "./routes/maps.routes.js"
 
 connectDB()
 
@@ -19,4 +20,5 @@ app.use(cookieParser())
 
 app.use("/users", userRoutes)
 app.use('/captains', captainRoutes)
+app.use("/map", mapsRoutes)
 export default app

@@ -149,9 +149,9 @@ const Home = () => {
 
           <h4 className='text-3xl font-semibold'>Find a trip</h4>
 
-          <form onSubmit={submitHandler}>
+          <form  className='relative py-3' onSubmit={submitHandler}>
 
-            <div className="line absolute h-16 w-1 top-[45%] left-[10%] bg-gray-900 rounded-full"></div>
+            <div className="line absolute h-16 w-1 top-[50%] -translate-y-1/2 left-5 bg-gray-900 rounded-full"></div>
 
             <input
               name='pickup' //connected with handleChange Function
