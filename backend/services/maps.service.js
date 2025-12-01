@@ -36,9 +36,10 @@ export const getDistanceAndTime = async (origin, destination) => {
       if (response.data.rows[0].elements[0].status === "ZERO_RESULTS") {
         throw new Error("Unable to fetch distance and time");
       }
+      
 
-      const distance = response.data.rows[0].elements[0].distance.text;
-      const duration = response.data.rows[0].elements[0].duration.text;
+      const distance = response.data.rows[0].elements[0].distance;
+      const duration = response.data.rows[0].elements[0].duration;
       return { distance, duration };
     } else {
       throw new Error("Unable to fetch distance and time");
