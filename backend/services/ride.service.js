@@ -1,7 +1,8 @@
+import crypto from "crypto";
 import { rideModel } from "../models/ride.models.js";
 import { getDistanceAndTime } from "./maps.service.js";
 
-const getFare = async (pickup, destination) => {
+export const calculateFare = async (pickup, destination) => {
   try {
     if (!pickup || !destination) {
       throw new Error("Pickup and destination are required");
@@ -47,17 +48,16 @@ const getFare = async (pickup, destination) => {
       auto: Math.round(autoFare),
       car: Math.round(carFare),
       moto: Math.round(motoFare),
-      distance: distanceTime.distance,
-      time: distanceTime.duration,
+      // distance: distanceTime.distance,
+      // time: distanceTime.duration,
     };
 
     return fare;
   } catch (error) {
     return res.status(500).json({ message: error || error.message });
   }
-};
 
-import crypto from "crypto";
+};
 
 export const getOtp = async (num) => {
   // Generate secure random digits
@@ -85,7 +85,7 @@ export const createRide = async ({
         "User, pickup, destination and vehicle type are required"
       );
     }
-    const fare = await getFare(pickup, destination);
+    const fare = await calculateFare(pickup, destination);
     const ride = await rideModel.create({
       user,
       pickup,
