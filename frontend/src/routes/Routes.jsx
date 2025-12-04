@@ -31,7 +31,7 @@ const Routing = () => {
         <Route
           path="/user/logout"
           element={
-            <UserProtectedWrapper>
+            <UserProtectedWrapper>  
               <UserLogout />
             </UserProtectedWrapper>
           }

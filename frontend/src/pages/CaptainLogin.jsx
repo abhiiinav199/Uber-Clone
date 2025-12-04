@@ -8,7 +8,7 @@ const CaptainLogin = () => {
       email: "",
       password:""
     })
-   const {captainData, setcaptainData} = useContext(CaptainDataContext)
+   const {setcaptainData} = useContext(CaptainDataContext)
    const navigate = useNavigate()
   
     const handleChange =  (e) => {

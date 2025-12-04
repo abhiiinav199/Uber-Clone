@@ -19,6 +19,9 @@ app.use(express.json())
 app.use(cookieParser())
 
 
+// i want to learn socket io . i dont have any prior knowledge for it. so explain in simple terms with correct terminologies. give deep explanation for itl
+
+
 
 
 app.use("/users", userRoutes)

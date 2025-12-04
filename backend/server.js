@@ -1,13 +1,13 @@
-import http from "http"
-import app from "./app.js"
-import dotenv from "dotenv"
-dotenv.config()
+import http from "http";
+import app from "./app.js";
+import { initializeSocket } from "./socket.js";
+import dotenv from "dotenv";
+dotenv.config();
 
+const server = http.createServer(app);
 
+initializeSocket(server);
 
-const server = http.createServer(app) // create server using the app
-
-server.listen(process.env.PORT, () =>{
-    console.log(`Sever is running on https://localhost:${process.env.PORT}`)
-})
-
+server.listen(process.env.PORT, () => {
+  console.log(`Sever is running on https://localhost:${process.env.PORT}`);
+});

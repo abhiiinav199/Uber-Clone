@@ -312,7 +312,7 @@ const Home = () => {
 
       <div
         ref={vehicleFoundRef}
-        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12"
+        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3  pt-12"
       >
         <LookingForDriver
           pickup={data.pickup}
@@ -326,7 +326,7 @@ const Home = () => {
 
       <div
         ref={waitingForDriverRef}
-        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12"
+        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 pt-12"
       >
         <WaitingForDriver
         
