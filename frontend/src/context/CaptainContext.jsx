@@ -18,6 +18,7 @@ const CaptainContext = ({children}) => {
             vehicleType:""
         }
     })
+   
   return (
     <CaptainDataContext.Provider value={{captainData, setcaptainData}}>{children}</CaptainDataContext.Provider>
   )

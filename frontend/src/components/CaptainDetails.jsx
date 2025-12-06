@@ -3,7 +3,7 @@ import { CaptainDataContext } from '../context/CaptainContext'
 
 const CaptainDetails = () => {
     const {captainData} = useContext(CaptainDataContext)
-    console.log(captainData)
+  
   return (
  <div>
         <div className='flex items-center justify-between'>

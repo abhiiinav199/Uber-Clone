@@ -8,6 +8,10 @@ import ConfirmRide from "../components/ConfirmRide";
 import VehiclePannel from "../components/VehiclePannel";
 import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver";
+import {SocketDataContext} from "../context/SocketContext"
+import { useContext } from "react";
+import { UserDataContext } from "../context/UserContext";
+import { useEffect } from "react";
 
 const Home = () => {
   const [data, setdata] = useState({
@@ -33,6 +37,18 @@ const Home = () => {
   const confirmRidePannelRef = useRef(null);
   const vehicleFoundRef = useRef(null);
   const waitingForDriverRef = useRef(null);
+
+  const {socket} = useContext(SocketDataContext);
+  const {user} = useContext(UserDataContext)
+
+  useEffect(() => {
+    if (!user?.user?._id) return; // mandatory line dont delete it
+
+    socket.emit("join", {
+      userId: user.user._id ,
+      userType: "user",
+    });
+  }, [user]);
 
   const handleChange = async (e) => {
     const { name, value } = e.target;

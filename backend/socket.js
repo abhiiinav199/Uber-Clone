@@ -14,13 +14,18 @@ export const initializeSocket = (server) => {
   io.on("connection", (socket) => {
     console.log(`New client connected: ${socket.id}`);
 
+
     const models = {
-      user: userModel,
+      user: userModel, 
       captain: captainModel,
     };
 
     socket.on("join", async (data) => {
       const { userId, userType } = data;
+
+    console.log(`User ${userId} joined as ${userType}`)
+    // console.log(`Captain ${userId} joined as ${userType}`)
+
 
       const Model = models[userType];// dynamic value selection can be used like this for accessing the values of the object - models[userType]
       await Model.findByIdAndUpdate(
